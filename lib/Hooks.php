@@ -47,8 +47,8 @@ class Hooks {
     }
 
     public function register() {
-        $this->userManager->listen('\OC\User', 'preLogin', function($uid, $password) {
-            $this->preLoginCallback($uid, $password);
+        $this->userManager->listen('\OC\User', 'failedLogin', function($uid, $password) {
+            $this->failedLoginCallback($uid, $password);
         });
 
         $this->userManager->listen('\OC\User', 'postLogin', function($user) {
@@ -60,13 +60,10 @@ class Hooks {
      * @param string $uid
      * @param Throttle $throttle
      */
-    private function preLoginCallback($uid, $password) {
+    private function failedLoginCallback($uid, $password) {
         $ip = \OC::$server->getRequest()->getRemoteAddress();
-
-        if(\OC_User::checkPassword($uid, $password) === false) {
-            $this->throttle->addFailedLoginAttempt($uid, $ip);
-			$this->throttle->putDelay($uid, $ip);
-        }
+		$this->throttle->addFailedLoginAttempt($uid, $ip);
+		$this->throttle->putDelay($uid, $ip);
     }
 
     /**
