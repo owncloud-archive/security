@@ -23,13 +23,13 @@
 namespace OCA\Security\Db;
 
 use OC\AppFramework\Utility\TimeFactory;
-use \OCP\IDBConnection;
+use OCP\IDBConnection;
 
 /**
  * Class DBService
  * @package OCA\Security\Db
  */
-class DBService {
+class DbService {
 
     /**
      * @var IDBConnection

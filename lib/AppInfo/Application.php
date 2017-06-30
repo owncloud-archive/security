@@ -25,7 +25,7 @@ use \OCP\AppFramework\App;
 
 use \OCA\Security\Throttle;
 use \OCA\Security\Hooks;
-use \OCA\Security\Db\DBService;
+use \OCA\Security\Db\DbService;
 
 class Application extends App {
 
@@ -34,8 +34,8 @@ class Application extends App {
 
         $container = $this->getContainer();
 
-        $container->registerService('DBService', function($c) {
-            return new DBService(
+        $container->registerService('DbService', function($c) {
+            return new DbService(
                 $c->query('ServerContainer')->getDb(),
 				new TimeFactory()
             );
@@ -43,7 +43,7 @@ class Application extends App {
 
         $container->registerService('Throttle', function($c) {
             return new Throttle(
-                $c->query('DBService')
+                $c->query('DbService')
             );
         });
 

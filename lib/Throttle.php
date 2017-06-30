@@ -30,12 +30,12 @@ use OCP\IDBConnection;
 class Throttle {
 
     /**
-     * @var \OCA\Security\Db\DBService $connection
+     * @var \OCA\Security\Db\DbService $connection
      */
     protected $dbConnection;
 
     /**
-     * @param IDBConnection $db
+     * @param IDBConnection $dbConnection
      */
     public function __construct($dbConnection) {
         $this->dbConnection = $dbConnection;

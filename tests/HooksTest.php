@@ -31,4 +31,8 @@ class HooksTest extends TestCase {
 	/** @var  Hooks */
 	private $hooks;
 
+	public function setUp() {
+		parent::setUp();
+
+	}
 }
