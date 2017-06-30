@@ -30,9 +30,61 @@ class HooksTest extends TestCase {
 
 	/** @var  Hooks */
 	private $hooks;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $userManagerMock;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $throttleMock;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject
+     */
+    private $requestMock;
 
 	public function setUp() {
 		parent::setUp();
 
-	}
+        $this->userManagerMock = $this->getMockBuilder('OCP\IUserManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->throttleMock = $this->getMockBuilder('OCA\Security\Throttle')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->requestMock = $this->getMockBuilder('OCP\IRequest')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->hooks = $this->getMockBuilder('OCA\Security\Hooks')
+            ->setConstructorArgs(
+                [
+                    $this->userManagerMock,
+                    $this->throttleMock,
+                    $this->requestMock
+                ]
+            )->setMethods()->getMock();
+    }
+
+    public function testFailedLoginCallback() {
+        $this->throttleMock->expects($this->once())
+            ->method('addFailedLoginAttempt');
+        $this->throttleMock->expects($this->once())
+            ->method('putDelay');
+
+        $this->hooks->failedLoginCallback("test");
+        $this->assertTrue(true);
+    }
+
+    public function testPostLoginCallback() {
+        $this->throttleMock->expects($this->once())
+            ->method('clearSuspiciousAttemptsForIp');
+        $user = $this->getMockBuilder('OCP\IUser')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->hooks->postLoginCallback($user);
+        $this->assertTrue(true);
+    }
 }

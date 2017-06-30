@@ -23,9 +23,77 @@
 namespace OCA\Security\Tests;
 
 
+use OCA\Security\Db\DbService;
 use OCA\Security\Throttle;
 use Test\TestCase;
 
 class ThrottleTest extends TestCase {
 
+    /** @var \PHPUnit_Framework_MockObject_MockObject | Throttle */
+    private $throttle;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject | DbService
+     */
+    private $dbServiceMock;
+
+    public function setUp() {
+        parent::setUp();
+
+        $this->dbServiceMock = $this->getMockBuilder('OCA\Security\Db\DbService')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->throttle = $this->getMockBuilder('OCA\Security\Throttle')
+            ->setConstructorArgs(
+                [
+                    $this->dbServiceMock
+                ]
+            )->setMethods()->getMock();
+    }
+
+    public function testAddFailedLoginAttempt() {
+        $this->dbServiceMock->expects($this->once())->method('addFailedLoginAttempt')
+            ->with('test', '192.168.1.1');
+
+        $this->throttle->addFailedLoginAttempt('test', '192.168.1.1');
+    }
+
+    public function testPutDelay() {
+
+        /** @var \PHPUnit_Framework_MockObject_MockObject | Throttle $throttle */
+        $throttle = $this->getMockBuilder('OCA\Security\Throttle')
+            ->setConstructorArgs(
+                [
+                    $this->dbServiceMock
+                ]
+            )->setMethods(['calculateDelayForIp'])->getMock();
+
+        $throttle->expects($this->once())->method('calculateDelayForIp')
+            ->with('192.168.1.1');
+
+        $throttle->putDelay('test', '192.168.1.1');
+    }
+
+    public function testCalculateDelayForUid() {
+        $this->dbServiceMock->expects($this->once())->method('getSuspiciousActivityCountForUid')
+            ->with('test')
+            ->willReturn(2);
+
+        $this->assertEquals(2, $this->throttle->calculateDelayForUid('test'));
+    }
+
+    public function testCalculateDelayForIp() {
+        $this->dbServiceMock->expects($this->once())->method('getSuspiciousActivityCountForIp')
+            ->with('192.168.1.1')
+            ->willReturn(5);
+
+        $this->assertEquals(5, $this->throttle->calculateDelayForIp('192.168.1.1'));
+    }
+
+    public function testClearSuspiciousAttemptsForIp() {
+        $this->dbServiceMock->expects($this->once())->method('deleteSuspiciousAttemptsForIp')
+            ->with('192.168.1.1');
+
+        $this->throttle->clearSuspiciousAttemptsForIp('192.168.1.1');
+    }
 }

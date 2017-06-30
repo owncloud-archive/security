@@ -66,7 +66,7 @@ class Hooks {
      * @param string $uid
      * @param Throttle $throttle
      */
-    private function failedLoginCallback($uid) {
+    public function failedLoginCallback($uid) {
         $this->throttle->addFailedLoginAttempt($uid, $this->request->getRemoteAddress());
         $this->throttle->putDelay($uid, $this->request->getRemoteAddress());
     }
@@ -74,8 +74,7 @@ class Hooks {
     /**
      * @param IUser $user
      */
-    private function postLoginCallback($user) {
-        $ip = \OC::$server->getRequest()->getRemoteAddress();
-        $this->throttle->clearSuspiciousAttemptsForIp($ip);
+    public function postLoginCallback($user) {
+        $this->throttle->clearSuspiciousAttemptsForIp($this->request->getRemoteAddress());
     }
 }
