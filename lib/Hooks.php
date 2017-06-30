@@ -24,6 +24,7 @@ namespace OCA\Security;
 
 use OCP\IUser;
 use OCP\IUserManager;
+use OCP\IRequest;
 
 /**
  * Class Hooks
@@ -35,15 +36,20 @@ class Hooks {
     private $userManager;
 
     /** @var Throttle*/
-    private $throttle;
+	private $throttle;
+
+	/** @var IRequest*/
+	private $request;
 
     /**
      * @param IUserManager $userManager
      * @param Throttle $throttle
+	 * @param IRequest
      */
-    public function __construct($userManager, $throttle){
+    public function __construct($userManager, $throttle, $request){
         $this->userManager = $userManager;
         $this->throttle = $throttle;
+        $this->request = $request;
     }
 
     public function register() {
@@ -61,16 +67,15 @@ class Hooks {
      * @param Throttle $throttle
      */
     private function failedLoginCallback($uid) {
-        $ip = \OC::$server->getRequest()->getRemoteAddress();
-		$this->throttle->addFailedLoginAttempt($uid, $ip);
-		$this->throttle->putDelay($uid, $ip);
+        $this->throttle->addFailedLoginAttempt($uid, $this->request->getRemoteAddress());
+        $this->throttle->putDelay($uid, $this->request->getRemoteAddress());
     }
 
     /**
      * @param IUser $user
      */
     private function postLoginCallback($user) {
-		$ip = \OC::$server->getRequest()->getRemoteAddress();
-    	$this->throttle->clearSuspiciousAttemptsForIp($ip);
+        $ip = \OC::$server->getRequest()->getRemoteAddress();
+        $this->throttle->clearSuspiciousAttemptsForIp($ip);
     }
 }

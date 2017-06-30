@@ -51,7 +51,8 @@ class Application extends App {
         $container->registerService('Hooks', function($c) {
             return new Hooks(
                 $c->query('ServerContainer')->getUserManager(),
-                $c->query('Throttle')
+                $c->query('Throttle'),
+				$c->query('Request')
             );
         });
 
