@@ -28,8 +28,8 @@ use Test\TestCase;
 
 class HooksTest extends TestCase {
 
-	/** @var  Hooks */
-	private $hooks;
+    /** @var  Hooks */
+    private $hooks;
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject
      */
@@ -43,8 +43,8 @@ class HooksTest extends TestCase {
      */
     private $requestMock;
 
-	public function setUp() {
-		parent::setUp();
+    public function setUp() {
+        parent::setUp();
 
         $this->userManagerMock = $this->getMockBuilder('OCP\IUserManager')
             ->disableOriginalConstructor()

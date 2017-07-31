@@ -36,15 +36,15 @@ class Hooks {
     private $userManager;
 
     /** @var Throttle*/
-	private $throttle;
+    private $throttle;
 
-	/** @var IRequest*/
-	private $request;
+    /** @var IRequest*/
+    private $request;
 
     /**
      * @param IUserManager $userManager
      * @param Throttle $throttle
-	 * @param IRequest
+     * @param IRequest
      */
     public function __construct($userManager, $throttle, $request){
         $this->userManager = $userManager;

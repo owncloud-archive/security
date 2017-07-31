@@ -56,8 +56,8 @@ class Throttle {
      * @return void
      */
     public function putDelay($uid, $ip) {
-    	//we determine appropriate delay time by using ip and username info
-		//initially it return count of failed attempts for ip
+        //we determine appropriate delay time by using ip and username info
+        //initially it return count of failed attempts for ip
         sleep($this->calculateDelayForIp($ip));
     }
 
@@ -77,10 +77,10 @@ class Throttle {
         return $this->dbConnection->getSuspiciousActivityCountForIp($ip);
     }
 
-	/**
-	 * @param string ip
-	 * @return void
-	 */
+    /**
+     * @param string ip
+     * @return void
+     */
     public function clearSuspiciousAttemptsForIp($ip) {
         $this->dbConnection->deleteSuspiciousAttemptsForIp($ip);
     }

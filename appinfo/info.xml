@@ -3,6 +3,7 @@
     <id>security</id>
     <name>Security</name>
     <description>ownCloud Security app. It hardens ownCloud security with several new features including brute force protection, 404 detection and strong password enforcement.</description>
+    <summary>ownCloud security hardening app</summary>
     <licence>AGPL</licence>
     <author>Semih Serhat Karakaya</author>
     <version>0.0.1</version>

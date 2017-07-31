@@ -36,12 +36,12 @@ class DbService {
      */
     private $connection;
 
-	/**
-	 * @var TimeFactory
-	 */
-	private $factory;
+    /**
+     * @var TimeFactory
+     */
+    private $factory;
 
-	/**
+    /**
      * DBService constructor.
      *
      * @param IDBConnection $connection
@@ -96,9 +96,9 @@ class DbService {
     }
 
     public function deleteSuspiciousAttemptsForIp($ip) {
-		$builder = $this->connection->getQueryBuilder();
-		$builder->delete('failed_login_attempts')
-			->where($builder->expr()->eq('ip',$builder->createNamedParameter($ip)))
-			->execute();
-	}
+        $builder = $this->connection->getQueryBuilder();
+        $builder->delete('failed_login_attempts')
+            ->where($builder->expr()->eq('ip',$builder->createNamedParameter($ip)))
+            ->execute();
+    }
 }
