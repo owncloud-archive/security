@@ -25,6 +25,8 @@ namespace OCA\Security;
 use OCP\IUser;
 use OCP\IUserManager;
 use OCP\IRequest;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * Class Hooks
@@ -41,15 +43,25 @@ class Hooks {
     /** @var IRequest*/
     private $request;
 
+    /** @var PasswordValidator */
+    private $passValidator;
+	/** @var EventDispatcherInterface */
+	private $dispatcher;
+
     /**
      * @param IUserManager $userManager
      * @param Throttle $throttle
-     * @param IRequest
+     * @param IRequest $request
+	 * @param PasswordValidator $passValidator
+	 * @param EventDispatcherInterface $dispatcher
      */
-    public function __construct($userManager, $throttle, $request){
+    public function __construct($userManager, $throttle, $request, $passValidator, $dispatcher){
         $this->userManager = $userManager;
         $this->throttle = $throttle;
         $this->request = $request;
+        $this->passValidator = $passValidator;
+        $this->dispatcher = $dispatcher;
+
     }
 
     public function register() {
@@ -60,6 +72,11 @@ class Hooks {
         $this->userManager->listen('\OC\User', 'postLogin', function($user) {
             $this->postLoginCallback($user);
         });
+
+		$this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
+			$this->passValidator->validate($event->getArgument('password'));
+		});
+
     }
 
     /**
