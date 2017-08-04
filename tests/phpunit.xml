@@ -3,4 +3,18 @@
     <testsuite name='ownCloud - Security App Tests'>
         <directory>../tests</directory>
     </testsuite>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../../security</directory>
+            <exclude>
+                <directory suffix=".php">../../security/l10n</directory>
+                <directory suffix=".php">../../security/lists</directory>
+                <directory suffix=".php">../../security/tests</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+    <logging>
+        <!-- and this is where your report will be written -->
+        <log type="coverage-clover" target="./clover.xml"/>
+    </logging>
 </phpunit>

@@ -21,11 +21,13 @@
 namespace OCA\Security\AppInfo;
 
 use OC\AppFramework\Utility\TimeFactory;
+use OCA\Security\SecurityConfig;
 use \OCP\AppFramework\App;
 
 use \OCA\Security\Throttle;
 use \OCA\Security\Hooks;
 use \OCA\Security\Db\DbService;
+use \OCA\Security\PasswordValidator;
 
 class Application extends App {
 
@@ -37,7 +39,7 @@ class Application extends App {
         $container->registerService('DbService', function($c) {
             return new DbService(
                 $c->query('ServerContainer')->getDb(),
-				new TimeFactory()
+				$c->query('OCP\AppFramework\Utility\ITimeFactory')
             );
         });
 
@@ -47,12 +49,26 @@ class Application extends App {
             );
         });
 
+		$container->registerService('SecurityConfig', function($c) {
+			return new SecurityConfig(
+				$c->query('OCP\IConfig')
+			);
+		});
+
+		$container->registerService('PasswordValidator', function($c) {
+			return new PasswordValidator(
+				$c->query('SecurityConfig'),
+				$c->query('OCP\IL10N')
+			);
+		});
 
         $container->registerService('Hooks', function($c) {
             return new Hooks(
                 $c->query('ServerContainer')->getUserManager(),
                 $c->query('Throttle'),
-				$c->query('Request')
+				$c->query('Request'),
+				$c->query('PasswordValidator'),
+				\OC::$server->getEventDispatcher()
             );
         });
 

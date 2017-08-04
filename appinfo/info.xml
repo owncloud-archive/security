@@ -15,5 +15,9 @@
         <prelogin/>
     </types>
     <category>security</category>
+    <settings>
+        <personal>OCA\Security\Panels\PersonalPanel</personal>
+        <admin>OCA\Security\Panels\AdminPanel</admin>
+    </settings>
     <repository type="git">https://github.com/owncloud/security.git</repository>
 </info>
