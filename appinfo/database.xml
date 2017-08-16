@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<database>
+    <name>*dbname*</name>
+    <create>true</create>
+    <overwrite>false</overwrite>
+    <charset>utf8</charset>
+    <table>
+        <name>*dbprefix*failed_login_attempts</name>
+
+        <declaration>
+
+            <field>
+                <name>ip</name>
+                <type>text</type>
+                <default></default>
+                <notnull>true</notnull>
+                <length>255</length>
+            </field>
+
+            <field>
+                <name>uid</name>
+                <type>text</type>
+                <default></default>
+                <notnull>true</notnull>
+                <length>64</length>
+            </field>
+
+            <field>
+                <name>attempted_at</name>
+                <type>integer</type>
+                <default></default>
+                <notnull>false</notnull>
+            </field>
+
+            <index>
+                <name>failed_login_attempts_ip</name>
+                <field>
+                    <name>ip</name>
+                    <sorting>ascending</sorting>
+                </field>
+            </index>
+
+            <index>
+                <name>failed_login_attempts_attempted_at</name>
+                <field>
+                    <name>attempted_at</name>
+                    <sorting>ascending</sorting>
+                </field>
+            </index>
+
+        </declaration>
+
+    </table>
+</database>
