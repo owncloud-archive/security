@@ -22,7 +22,6 @@ namespace OCA\Security\AppInfo;
 
 use OCA\Security\SecurityConfig;
 use \OCP\AppFramework\App;
-
 use \OCA\Security\Throttle;
 use \OCA\Security\Hooks;
 use \OCA\Security\Db\DbService;
@@ -38,7 +37,7 @@ class Application extends App {
         $container->registerService('DbService', function($c) {
             return new DbService(
                 $c->query('ServerContainer')->getDb(),
-				$c->query('OCP\AppFramework\Utility\ITimeFactory')
+                $c->query('OCP\AppFramework\Utility\ITimeFactory')
             );
         });
 
@@ -48,26 +47,26 @@ class Application extends App {
             );
         });
 
-		$container->registerService('SecurityConfig', function($c) {
-			return new SecurityConfig(
-				$c->query('OCP\IConfig')
-			);
-		});
+        $container->registerService('SecurityConfig', function($c) {
+            return new SecurityConfig(
+                $c->query('OCP\IConfig')
+            );
+        });
 
-		$container->registerService('PasswordValidator', function($c) {
-			return new PasswordValidator(
-				$c->query('SecurityConfig'),
-				$c->query('OCP\IL10N')
-			);
-		});
+        $container->registerService('PasswordValidator', function($c) {
+            return new PasswordValidator(
+                $c->query('SecurityConfig'),
+                $c->query('OCP\IL10N')
+            );
+        });
 
         $container->registerService('Hooks', function($c) {
             return new Hooks(
                 $c->query('ServerContainer')->getUserManager(),
                 $c->query('Throttle'),
-				$c->query('Request'),
-				$c->query('PasswordValidator'),
-				\OC::$server->getEventDispatcher(),
+                $c->query('Request'),
+                $c->query('PasswordValidator'),
+                \OC::$server->getEventDispatcher(),
                 $c->query('SecurityConfig')
             );
         });

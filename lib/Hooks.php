@@ -46,8 +46,8 @@ class Hooks {
     /** @var PasswordValidator */
     private $passValidator;
 
-	/** @var EventDispatcherInterface */
-	private $dispatcher;
+    /** @var EventDispatcherInterface */
+    private $dispatcher;
 
     /** @var SecurityConfig */
     private $config;
@@ -56,8 +56,8 @@ class Hooks {
      * @param IUserManager $userManager
      * @param Throttle $throttle
      * @param IRequest $request
-	 * @param PasswordValidator $passValidator
-	 * @param EventDispatcherInterface $dispatcher
+     * @param PasswordValidator $passValidator
+     * @param EventDispatcherInterface $dispatcher
      * @param SecurityConfig $config
      */
     public function __construct($userManager, $throttle, $request, $passValidator, $dispatcher, $config){
@@ -81,9 +81,9 @@ class Hooks {
             });
         }
 
-		$this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
-			$this->passValidator->validate($event->getArgument('password'));
-		});
+        $this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
+            $this->passValidator->validate($event->getArgument('password'));
+        });
 
     }
 
