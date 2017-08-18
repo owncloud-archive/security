@@ -42,7 +42,7 @@ class SecurityConfig {
 	}
 
 	/**
-	 * is brute force protection enabled
+	 * get all security configs
 	 *
 	 * @return array
 	 */

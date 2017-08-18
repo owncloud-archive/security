@@ -20,7 +20,6 @@
  */
 namespace OCA\Security\AppInfo;
 
-use OC\AppFramework\Utility\TimeFactory;
 use OCA\Security\SecurityConfig;
 use \OCP\AppFramework\App;
 
@@ -68,7 +67,8 @@ class Application extends App {
                 $c->query('Throttle'),
 				$c->query('Request'),
 				$c->query('PasswordValidator'),
-				\OC::$server->getEventDispatcher()
+				\OC::$server->getEventDispatcher(),
+                $c->query('SecurityConfig')
             );
         });
 
