@@ -45,37 +45,45 @@ class Hooks {
 
     /** @var PasswordValidator */
     private $passValidator;
-	/** @var EventDispatcherInterface */
-	private $dispatcher;
+
+    /** @var EventDispatcherInterface */
+    private $dispatcher;
+
+    /** @var SecurityConfig */
+    private $config;
 
     /**
      * @param IUserManager $userManager
      * @param Throttle $throttle
      * @param IRequest $request
-	 * @param PasswordValidator $passValidator
-	 * @param EventDispatcherInterface $dispatcher
+     * @param PasswordValidator $passValidator
+     * @param EventDispatcherInterface $dispatcher
+     * @param SecurityConfig $config
      */
-    public function __construct($userManager, $throttle, $request, $passValidator, $dispatcher){
+    public function __construct($userManager, $throttle, $request, $passValidator, $dispatcher, $config){
         $this->userManager = $userManager;
         $this->throttle = $throttle;
         $this->request = $request;
         $this->passValidator = $passValidator;
         $this->dispatcher = $dispatcher;
+        $this->config = $config;
 
     }
 
     public function register() {
-        $this->userManager->listen('\OC\User', 'failedLogin', function($uid) {
-            $this->failedLoginCallback($uid);
-        });
+        if($this->config->getIsBruteForceProtectionEnabled() === true) {
+            $this->userManager->listen('\OC\User', 'failedLogin', function ($uid) {
+                $this->failedLoginCallback($uid);
+            });
 
-        $this->userManager->listen('\OC\User', 'postLogin', function($user) {
-            $this->postLoginCallback($user);
-        });
+            $this->userManager->listen('\OC\User', 'postLogin', function ($user) {
+                $this->postLoginCallback($user);
+            });
+        }
 
-		$this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
-			$this->passValidator->validate($event->getArgument('password'));
-		});
+        $this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
+            $this->passValidator->validate($event->getArgument('password'));
+        });
 
     }
 
