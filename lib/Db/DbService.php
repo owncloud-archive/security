@@ -23,6 +23,7 @@
 namespace OCA\Security\Db;
 
 use OC\AppFramework\Utility\TimeFactory;
+use OCA\Security\SecurityConfig;
 use OCP\IDBConnection;
 
 /**
@@ -40,15 +41,22 @@ class DbService {
      * @var TimeFactory
      */
     private $factory;
+    /**
+     * @var SecurityConfig
+     */
+    private $config;
 
     /**
      * DBService constructor.
      *
      * @param IDBConnection $connection
+     * @param TimeFactory $factory
+     * @param SecurityConfig $config
      */
-    public function __construct(IDBConnection $connection, TimeFactory $factory) {
+    public function __construct(IDBConnection $connection, TimeFactory $factory, SecurityConfig $config) {
         $this->connection = $connection;
         $this->factory = $factory;
+        $this->config = $config;
     }
 
     /**
@@ -69,7 +77,7 @@ class DbService {
      */
     public function getSuspiciousActivityCountForUid($uid) {
         $builder = $this->connection->getQueryBuilder();
-        $thresholdTime = (new \DateTime())->modify("-86400 second")->getTimestamp();
+        $thresholdTime = (new \DateTime())->modify("-". $this->config->getBruteForceProtectionTimeThreshold() . "second")->getTimestamp();
         $attempts = $builder->selectAlias($builder->createFunction('COUNT(*)'), 'count')
             ->from('failed_login_attempts')
             ->where($builder->expr()->gt('attempted_at', $builder->createNamedParameter($thresholdTime)))
@@ -85,7 +93,7 @@ class DbService {
      */
     public function getSuspiciousActivityCountForIp($ip) {
         $builder = $this->connection->getQueryBuilder();
-        $thresholdTime = (new \DateTime())->modify("-86400 second")->getTimestamp();
+        $thresholdTime = (new \DateTime())->modify("-". $this->config->getBruteForceProtectionTimeThreshold() . "second")->getTimestamp();
         $attempts = $builder->selectAlias($builder->createFunction('COUNT(*)'), 'count')
             ->from('failed_login_attempts')
             ->where($builder->expr()->gt('attempted_at', $builder->createNamedParameter($thresholdTime)))
@@ -93,6 +101,24 @@ class DbService {
             ->execute()
             ->fetch();
         return intval($attempts['count']);
+    }
+
+    /**
+     * @param string $ip
+     * @return int
+     */
+    public function getLastFailedLoginAttemptTimeForIp($ip) {
+        $builder = $this->connection->getQueryBuilder();
+        $thresholdTime = (new \DateTime())->modify("-". $this->config->getBruteForceProtectionTimeThreshold() . "second")->getTimestamp();
+        $lastAttempt = $builder->select('attempted_at')
+            ->from('failed_login_attempts')
+            ->where($builder->expr()->gt('attempted_at', $builder->createNamedParameter($thresholdTime)))
+            ->andWhere($builder->expr()->eq('ip', $builder->createNamedParameter($ip)))
+            ->orderBy('attempted_at','DESC')
+            ->setMaxResults(1)
+            ->execute()
+            ->fetch();
+        return intval($lastAttempt['attempted_at']);
     }
 
     public function deleteSuspiciousAttemptsForIp($ip) {

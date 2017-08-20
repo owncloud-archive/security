@@ -22,21 +22,25 @@
 /** @var \OCP\IL10N $l */
 script('security', 'settings-admin');
 ?>
-<h2 class="inlineblock"><?php p($l->t('Brute Force Protection')); ?></h2>
-<div id="brute-force-protection">
-	<div>
-		<input type="checkbox" class="checkbox" id="security-brute-force-protection-enabled"
-			<?php if ($_['isBruteForceProtectionEnabled']) p("checked");?> >
-		<label for="security-brute-force-protection-enabled"><?php p($l->t('Activate Brute Force Protection')) ?></label>
+<div id="security-brute-force-protection" class="section">
+    <h2 class="inlineblock"><?php p($l->t('Brute Force Protection')); ?></h2>
+    <span id="security-save-bfp-settings-message" class="msg"></span>
+    <div>
+        <label for="security-bfp-threshold-time"><?php p($l->t('Count failed login attempts over how many seconds?')) ?></label><br>
+        <input type="number" id="security-bfp-threshold-time"  value="<?php p($_['bruteForceProtectionTimeThreshold']) ?>"><br>
+        <label for="security-bfp-fail-tolerance"><?php p($l->t('Ban after how many failed login attempts?')) ?></label><br>
+        <input type="number" id="security-bfp-fail-tolerance"  value="<?php p($_['bruteForceProtectionFailTolerance']) ?>"><br>
+        <label for="security-bfp-ban-period"><?php p($l->t('Ban for how many seconds?')) ?></label><br>
+        <input type="number" id="security-bfp-ban-period" value="<?php p($_['bruteForceProtectionBanPeriod']) ?>"><br>
+        <button id="save-bfp-settings" class="save"><?php p($l->t('Save settings'));?></button>
 	</div>
 </div>
-<br>
-<h2 class="inlineblock"><?php p($l->t('Password Policy')); ?></h2>
-<div id="password-policy">
-	<div>
+<div id="security-password-policy" class="section">
+    <h2 class="inlineblock"><?php p($l->t('Password Policy')); ?></h2>
+    <div>
 		<label for="security-min-password-length"><?php p($l->t('Determine minimum password length')) ?></label>
 		<input type="number" id="security-min-password-length" min="6" value="<?php p($_['minPasswordLength']) ?>">
-        <button id="save-pass-length" class="save"><?php p($l->t('Save Length'));?></button>
+        <button id="save-pass-length" class="save"><?php p($l->t('Save length'));?></button>
         <span id="security-min-password-length-message" class="msg"></span>
 	</div>
 	<div>
