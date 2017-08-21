@@ -22,7 +22,6 @@
 
 namespace OCA\Security;
 
-use OCP\IUser;
 use OCP\IUserManager;
 use OCP\IRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -45,15 +44,16 @@ class Hooks {
 
     /** @var PasswordValidator */
     private $passValidator;
-	/** @var EventDispatcherInterface */
-	private $dispatcher;
+
+    /** @var EventDispatcherInterface */
+    private $dispatcher;
 
     /**
      * @param IUserManager $userManager
      * @param Throttle $throttle
      * @param IRequest $request
-	 * @param PasswordValidator $passValidator
-	 * @param EventDispatcherInterface $dispatcher
+     * @param PasswordValidator $passValidator
+     * @param EventDispatcherInterface $dispatcher
      */
     public function __construct($userManager, $throttle, $request, $passValidator, $dispatcher){
         $this->userManager = $userManager;
@@ -65,33 +65,36 @@ class Hooks {
     }
 
     public function register() {
+        $this->userManager->listen('\OC\User', 'preLogin', function($user) {
+            $this->preLoginCallback();
+        });
+
         $this->userManager->listen('\OC\User', 'failedLogin', function($uid) {
             $this->failedLoginCallback($uid);
         });
 
         $this->userManager->listen('\OC\User', 'postLogin', function($user) {
-            $this->postLoginCallback($user);
+            $this->postLoginCallback();
         });
 
-		$this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
-			$this->passValidator->validate($event->getArgument('password'));
-		});
+        $this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
+            $this->passValidator->validate($event->getArgument('password'));
+        });
 
     }
 
     /**
      * @param string $uid
-     * @param Throttle $throttle
      */
     public function failedLoginCallback($uid) {
         $this->throttle->addFailedLoginAttempt($uid, $this->request->getRemoteAddress());
-        $this->throttle->putDelay($uid, $this->request->getRemoteAddress());
     }
 
-    /**
-     * @param IUser $user
-     */
-    public function postLoginCallback($user) {
+    public function postLoginCallback() {
         $this->throttle->clearSuspiciousAttemptsForIp($this->request->getRemoteAddress());
+    }
+
+    public function preLoginCallback() {
+        $this->throttle->applyBruteForcePolicy($this->request->getRemoteAddress());
     }
 }

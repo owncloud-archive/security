@@ -28,7 +28,7 @@ style('security', 'settings-personal');
 		"<p>". $l->t('Passwords must:'). "</p>");?>
 	<ul class="pass-info">
 		<?php print_unescaped(
-			"<li class='pass-info-element'>". $l->t('be at least 8 characters long ', $_['minPasswordLength']). "</li>");?>
+			"<li class='pass-info-element'>". $l->t('be at least %s characters long ', $_['minPasswordLength']). "</li>");?>
 		<?php if ($_['isUpperLowerCaseEnforced']) print_unescaped(
 			"<li class='pass-info-element'>". $l->t('contain at least one uppercase letter and at least one lowercase letter '). "</li>");?>
 		<?php if ($_['isNumericalCharsEnforced']) print_unescaped(

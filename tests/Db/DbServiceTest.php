@@ -24,6 +24,7 @@ namespace OCA\Security\Tests\Db;
 
 use OCA\Security\Db\DbService;
 use OC\AppFramework\Utility\TimeFactory;
+use OCA\Security\SecurityConfig;
 use OCP\IDBConnection;
 use Test\TestCase;
 
@@ -41,6 +42,9 @@ class DbServiceTest extends TestCase {
     /** @var  TimeFactory */
     private $factory;
 
+    /** @var \PHPUnit_Framework_MockObject_MockObject | SecurityConfig */
+    private $configMock;
+
     /** @var string  */
     private $dbTable = 'failed_login_attempts';
 
@@ -49,7 +53,10 @@ class DbServiceTest extends TestCase {
 
         $this->connection = \OC::$server->getDatabaseConnection();
         $this->factory = new TimeFactory();
-        $this->dbService = new DbService($this->connection, $this->factory);
+        $this->configMock = $this->getMockBuilder(SecurityConfig::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->dbService = new DbService($this->connection, $this->factory, $this->configMock);
 
         $query = $this->connection->getQueryBuilder()->select('*')->from($this->dbTable);
         $result = $query->execute()->fetchAll();
@@ -65,7 +72,7 @@ class DbServiceTest extends TestCase {
     public function testAddServer() {
         $ip = "192.168.1.1";
         $uid = "test";
-        $id = $this->dbService->addFailedLoginAttempt($uid, $ip);
+        $this->dbService->addFailedLoginAttempt($uid, $ip);
 
         $query = $this->connection->getQueryBuilder()->select('*')->from($this->dbTable);
         $result = $query->execute()->fetchAll();
@@ -75,15 +82,32 @@ class DbServiceTest extends TestCase {
     }
 
     public function testGetSuspiciousActivityCountForUid() {
+        $this->configMock->expects($this->once())
+            ->method('getBruteForceProtectionTimeThreshold')
+            ->willReturn('300');
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->assertEquals(2, $this->dbService->getSuspiciousActivityCountForUid('test1'));
     }
 
     public function testGetSuspiciousActivityCountForIp() {
+        $this->configMock->expects($this->once())
+            ->method('getBruteForceProtectionTimeThreshold')
+            ->willReturn('300');
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->assertEquals(2, $this->dbService->getSuspiciousActivityCountForIp('192.168.1.1'));
+    }
+
+    public function testGetLastFailedLoginAttemptTimeForIp() {
+        $this->configMock->expects($this->once())
+            ->method('getBruteForceProtectionTimeThreshold')
+            ->willReturn('300');
+        $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
+        $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
+        $query = $this->connection->getQueryBuilder()->select('attempted_at')->from($this->dbTable);
+        $result = $query->execute()->fetchAll();
+        $this->assertEquals($this->dbService->getLastFailedLoginAttemptTimeForIp('192.168.1.1'), $result[1]['attempted_at']);
     }
 
     public function testDeleteSuspiciousAttemptsForIp() {

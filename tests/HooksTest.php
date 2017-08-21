@@ -47,14 +47,14 @@ class HooksTest extends TestCase {
      * @var \PHPUnit_Framework_MockObject_MockObject | IRequest
      */
     private $requestMock;
-	/**
-	 * @var \PHPUnit_Framework_MockObject_MockObject | PasswordValidator
-	 */
-	private $passwordValidatorMock;
-	/**
-	 * @var \PHPUnit_Framework_MockObject_MockObject | EventDispatcher
-	 */
-	private $dispatcherMock;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject | PasswordValidator
+     */
+    private $passwordValidatorMock;
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject | EventDispatcher
+     */
+    private $dispatcherMock;
 
     public function setUp() {
         parent::setUp();
@@ -70,34 +70,31 @@ class HooksTest extends TestCase {
             ->disableOriginalConstructor()
             ->getMock();
         $this->passwordValidatorMock = $this->getMockBuilder('OCA\Security\PasswordValidator')
-			->disableOriginalConstructor()
-			->getMock();
-		$this->dispatcherMock = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
-			->disableOriginalConstructor()
-			->getMock();
-
+            ->disableOriginalConstructor()
+            ->getMock();
+        $this->dispatcherMock = $this->getMockBuilder(EventDispatcher::class)
+            ->disableOriginalConstructor()
+            ->getMock();
 
         $this->hooks = new Hooks(
-        	$this->userManagerMock,
-			$this->throttleMock,
-			$this->requestMock,
-			$this->passwordValidatorMock,
-			$this->dispatcherMock);
+            $this->userManagerMock,
+            $this->throttleMock,
+            $this->requestMock,
+            $this->passwordValidatorMock,
+            $this->dispatcherMock);
     }
 
     public function testRegister() {
-    	$this->userManagerMock->expects($this->exactly(2))
-			->method('listen');
-    	$this->dispatcherMock->expects($this->once())
-			->method('addListener');
-    	$this->hooks->register();
-	}
+        $this->userManagerMock->expects($this->exactly(3))
+            ->method('listen');
+        $this->dispatcherMock->expects($this->once())
+            ->method('addListener');
+        $this->hooks->register();
+    }
 
     public function testFailedLoginCallback() {
         $this->throttleMock->expects($this->once())
             ->method('addFailedLoginAttempt');
-        $this->throttleMock->expects($this->once())
-            ->method('putDelay');
 
         $this->hooks->failedLoginCallback("test");
         $this->assertTrue(true);
@@ -107,12 +104,15 @@ class HooksTest extends TestCase {
         $this->throttleMock->expects($this->once())
             ->method('clearSuspiciousAttemptsForIp');
 
-		/** @var \OCP\IUser $user*/
-        $user = $this->getMockBuilder('OCP\IUser')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->hooks->postLoginCallback();
+        $this->assertTrue(true);
+    }
 
-        $this->hooks->postLoginCallback($user);
+    public function testPreLoginCallback() {
+        $this->throttleMock->expects($this->once())
+            ->method('applyBruteForcePolicy');
+
+        $this->hooks->preLoginCallback();
         $this->assertTrue(true);
     }
 }

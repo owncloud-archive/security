@@ -21,7 +21,10 @@
 
 namespace OCA\Security;
 
-use OCP\IDBConnection;
+use OC\User\LoginException;
+use OCA\Security\Db\DbService;
+use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\IL10N;
 
 /**
  * Class Throttle
@@ -35,15 +38,36 @@ class Throttle {
     protected $dbConnection;
 
     /**
-     * @param IDBConnection $dbConnection
+     * @var SecurityConfig $config
      */
-    public function __construct($dbConnection) {
+    protected $config;
+
+    /**
+     * @var IL10N $l
+     */
+    protected $l;
+
+    /**
+     * @var ITimeFactory $timeFactory
+     */
+    protected $timeFactory;
+
+    /**
+     * @param \OCA\Security\Db\DbService $dbConnection
+     * @param SecurityConfig $config
+     * @param IL10N $l
+     * @param ITimeFactory $timeFactory
+     */
+    public function __construct(DbService $dbConnection, SecurityConfig $config, IL10N $l, ITimeFactory $timeFactory) {
         $this->dbConnection = $dbConnection;
+        $this->config = $config;
+        $this->l = $l;
+        $this->timeFactory = $timeFactory;
     }
 
     /**
      * @param string $uid
-     * @param string ip
+     * @param string $ip
      * @return void
      */
     public function addFailedLoginAttempt($uid, $ip) {
@@ -51,34 +75,23 @@ class Throttle {
     }
 
     /**
-     * @param string $uid
-     * @param string ip
-     * @return void
+     * @param string $ip
+     * @throws LoginException
      */
-    public function putDelay($uid, $ip) {
-        //we determine appropriate delay time by using ip and username info
-        //initially it return count of failed attempts for ip
-        sleep($this->calculateDelayForIp($ip));
+    public function applyBruteForcePolicy($ip) {
+        $banPeriod = $this->config->getBruteForceProtectionBanPeriod();
+        $banUntil = $this->dbConnection->getLastFailedLoginAttemptTimeForIp($ip)+$banPeriod;
+        if($this->dbConnection->getSuspiciousActivityCountForIp($ip) >=
+            $this->config->getBruteForceProtectionFailTolerance() &&
+            $banUntil > $this->timeFactory->getTime()) {
+            throw new LoginException($this->l->t("Too many failed login attempts. Try again in %s minutes.",
+                ceil($banPeriod/60))
+            );
+        }
     }
 
     /**
-     * @param string $uid
-     * @return int
-     */
-    public function calculateDelayForUid($uid) {
-        return $this->dbConnection->getSuspiciousActivityCountForUid($uid);
-    }
-
-    /**
-     * @param string ip
-     * @return int
-     */
-    public function calculateDelayForIp($ip) {
-        return $this->dbConnection->getSuspiciousActivityCountForIp($ip);
-    }
-
-    /**
-     * @param string ip
+     * @param string $ip
      * @return void
      */
     public function clearSuspiciousAttemptsForIp($ip) {

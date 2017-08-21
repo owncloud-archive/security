@@ -19,24 +19,38 @@
  */
 
 $(document).ready(function(){
-    $('#password-policy').on('click','#save-pass-length',
+    $('#security-brute-force-protection').on('click','#save-bfp-settings',
         function() {
-            OC.msg.startSaving('#of-msg');
-            var length = $('#security-min-password-length').val();
-            if($.isNumeric(length) && length>0) {
-                OC.AppConfig.setValue('security', 'min_password_length', length);
-                OC.msg.finishedSuccess('#security-min-password-length-message', OC.L10N.translate('Security', 'Length Saved'));
+            OC.msg.startSaving('#security-save-bfp-settings-message');
+            var thresholdTime = $('#security-bfp-threshold-time').val();
+            var failTolerance = $('#security-bfp-fail-tolerance').val();
+            var banPeriod = $('#security-bfp-ban-period').val();
+            if($.isNumeric(thresholdTime) && thresholdTime>0 &&
+                $.isNumeric(failTolerance) && failTolerance>0 &&
+                $.isNumeric(banPeriod) && banPeriod>0) {
+                OC.AppConfig.setValue('security', 'brute_force_protection_time_threshold', thresholdTime);
+                OC.AppConfig.setValue('security', 'brute_force_protection_fail_tolerance', failTolerance);
+                OC.AppConfig.setValue('security', 'brute_force_protection_ban_period', banPeriod);
+                OC.msg.finishedSuccess('#security-save-bfp-settings-message', t('Security', 'Preferences are saved'));
             } else {
-                OC.msg.finishedError('#security-min-password-length-message', OC.L10N.translate('Security', 'Length must be positive integer'));
+                OC.msg.finishedError('#security-save-bfp-settings-message', t('Security', 'Inputs must be positive integers'));
             }
         }
     );
 
-    $('#security-brute-force-protection-enabled').click(function() {
-        var value;
-        (this.checked) ? value = '1': value = '0';
-        OC.AppConfig.setValue('security', 'enable_brute_force_protection', value);
-    });
+    $('#security-password-policy').on('click','#save-pass-length',
+        function() {
+            OC.msg.startSaving('#security-min-password-length-message');
+            var length = $('#security-min-password-length').val();
+            if($.isNumeric(length) && length>0) {
+                OC.AppConfig.setValue('security', 'min_password_length', length);
+                OC.msg.finishedSuccess('#security-min-password-length-message', t('Security', 'Length is saved'));
+            } else {
+                OC.msg.finishedError('#security-min-password-length-message', t('Security', 'Length must be positive integer'));
+            }
+        }
+    );
+
     $('#security-enforce-upper-lower-case').click(function() {
         var value;
         (this.checked) ? value = '1': value = '0';
