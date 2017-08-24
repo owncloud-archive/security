@@ -1,0 +1,28 @@
+{ "translations": {
+    "Preferences are saved" : "Preferensi disimpan",
+    "Inputs must be positive integers" : "Input harus bilangan bulat positif",
+    "Length is saved" : "Panjang disimpan",
+    "Length must be positive integer" : "Panjang harus bilangan bulat positif",
+    "Password needs to be at least %s characters long" : "Kata sandi harus minimal %s karakter",
+    "Password should contain at least one upper and one lower case character." : "Kata sandi harus berisi minimal satu huruf besar dan satu huruf kecil.",
+    "Password should contain at least one numerical character." : "Kata sandi harus berisi minimal satu angka.",
+    "Password should contain at least one special character." : "Kata sandi harus berisi minimal satu karakter khusus.",
+    "Too many failed login attempts. Try again in %s minutes." : "Terlalu banyak upaya masuk yang gagal. Coba lagi dalam %s menit.",
+    "Brute Force Protection" : "Perlindungan Brute Force",
+    "Count failed login attempts over how many seconds?" : "Menghitung usaha masuk gagal selama berapa detik?",
+    "Ban after how many failed login attempts?" : "Blokir setelah seberapa banyak upaya masuk yang gagal?",
+    "Ban for how many seconds?" : "Blokir selama berapa detik?",
+    "Save settings" : "Simpan pengaturan",
+    "Password Policy" : "Ketentuan Kata Sandi",
+    "Determine minimum password length" : "Tentukan panjang kata sandi minimal",
+    "Save length" : "Simpan panjang",
+    "Enforce at least one upper and one lower case character on passwords" : "Terapkan minimal satu huruf besar dan satu huruf kecil pada kata sandi",
+    "Enforce at least one numerical characters on passwords" : "Terapkan minimal satu angka pada kata sandi",
+    "Enforce at least one special characters on passwords" : "Terapkan minimal satu karakter khusus pada kata sandi",
+    "Passwords must:" : "Kata sandi harus:",
+    "be at least %s characters long " : "harus berisi minimal %s karakter ",
+    "contain at least one uppercase letter and at least one lowercase letter " : "berisi minimal satu huruf besar dan satu huruf kecil ",
+    "contain at least one numerical character" : "berisi minimal satu angka",
+    "contain at least one special character" : "berisi minimal satu karakter khusus"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
