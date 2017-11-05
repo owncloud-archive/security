@@ -1,0 +1,28 @@
+{ "translations": {
+    "Preferences are saved" : "设定已被保存",
+    "Inputs must be positive integers" : "输入必须是正数",
+    "Length is saved" : "长度已保存",
+    "Length must be positive integer" : "长度必须是正数",
+    "Password needs to be at least %s characters long" : "密码长度至少 %s 个字符",
+    "Password should contain at least one upper and one lower case character." : "密码应包含至少一个大写字母及一个小写字母",
+    "Password should contain at least one numerical character." : "密码应至少包含一个数字字符",
+    "Password should contain at least one special character." : "密码应至少包含一个特殊字符",
+    "Too many failed login attempts. Try again in %s minutes." : "太多错误了，请在%s分钟之后重试",
+    "Brute Force Protection" : "暴力破解保护",
+    "Count failed login attempts over how many seconds?" : "计算多少秒内的失败次数？",
+    "Ban after how many failed login attempts?" : "多少次登录失败后进行封禁？",
+    "Ban for how many seconds?" : "封禁多少秒？",
+    "Save settings" : "保存设置",
+    "Password Policy" : "密码策略",
+    "Determine minimum password length" : "设定密码最短长度",
+    "Save length" : "保存长度",
+    "Enforce at least one upper and one lower case character on passwords" : "密码中至少加上一个大写字母和一个小写字母",
+    "Enforce at least one numerical characters on passwords" : "密码中至少加上一个数字",
+    "Enforce at least one special characters on passwords" : "密码中需要包含至少一个特殊字符",
+    "Passwords must:" : "密码必须：",
+    "be at least %s characters long " : "至少要有%s个字符长度",
+    "contain at least one uppercase letter and at least one lowercase letter " : "包含至少一个大写字母和至少一个小写字母",
+    "contain at least one numerical character" : "包含至少一个数字",
+    "contain at least one special character" : "包含至少一个特殊字符"
+},"pluralForm" :"nplurals=1; plural=0;"
+}
