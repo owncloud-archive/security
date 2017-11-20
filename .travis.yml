@@ -17,6 +17,8 @@ branches:
 install:
   - wget https://raw.githubusercontent.com/owncloud/administration/master/travis-ci/before_install.sh
   - bash ./before_install.sh security $CORE_BRANCH $DB
+  - make
+  - make appstore
   - cd ../core
   - php occ app:enable security
 
@@ -24,6 +26,12 @@ script:
   # execute unit tests
   - cd apps/security/tests
   - ../../../lib/composer/phpunit/phpunit/phpunit --configuration phpunit.xml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+after_failure:
+    - cat ../../data/owncloud.log
 
 matrix:
   include:
