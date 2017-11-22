@@ -15,10 +15,13 @@
         <prelogin/>
     </types>
     <category>security</category>
+    <screenshot>https://raw.githubusercontent.com/owncloud/security/95c66b4a6e62130e83590f346ee87498907a605d/screenshots/owncloud-security.jpg</screenshot>
     <screenshot>https://raw.githubusercontent.com/owncloud/security/43c55325cf09e5a8b81fafc358b08701aba81173/screenshots/settings.png</screenshot>
     <settings>
         <personal>OCA\Security\Panels\PersonalPanel</personal>
         <admin>OCA\Security\Panels\AdminPanel</admin>
     </settings>
+    <website>https://github.com/owncloud/security/</website>
+    <bugs>https://github.com/owncloud/security/issues</bugs>
     <repository type="git">https://github.com/owncloud/security.git</repository>
 </info>
