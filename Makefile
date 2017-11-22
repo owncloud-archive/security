@@ -90,8 +90,11 @@ appstore:
 	mkdir -p $(appstore_package_name)
 	cp --parents -r \
 	appinfo \
+	css \
+	js \
 	l10n \
 	lib \
+	templates \
 	LICENSE \
 	README.md \
 	$(appstore_package_name)
