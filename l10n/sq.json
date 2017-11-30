@@ -1,0 +1,28 @@
+{ "translations": {
+    "Preferences are saved" : "Parapëlqimet u ruajtën",
+    "Inputs must be positive integers" : "Ato çka jepen duhet të jenë numra të plotë pozitivë",
+    "Length is saved" : "Gjatësia u ruajt",
+    "Length must be positive integer" : "Gjatësia duhet të jetë një numër i plotë pozitiv",
+    "Password needs to be at least %s characters long" : "Fjalëkalimi duhet të jetë e pakta %s shenja i gjatë",
+    "Password should contain at least one upper and one lower case character." : "Fjalëkalimi do të duhej të përmbante e pakta një shenjë shkruar me të madhe dhe një shenjë shkruar me të vogël.",
+    "Password should contain at least one numerical character." : "Fjalëkalimi do të duhej të përmbante e pakta një shenjë numerike.",
+    "Password should contain at least one special character." : "Fjalëkalimi do të duhej të përmbante e pakta një shenjë speciale.",
+    "Too many failed login attempts. Try again in %s minutes." : "Shumë përpjekje të dështuara për hyrje. Riprovoni pas %s minutash?",
+    "Brute Force Protection" : "Mbrojtje Nga Hyrjet Me Zor",
+    "Count failed login attempts over how many seconds?" : "Të numërojë përpjekje të dështuara për hyrje tej sa sekondash? ",
+    "Ban after how many failed login attempts?" : "Të dëbohet pas sa përpjekjesh të dështuara për hyrje?",
+    "Ban for how many seconds?" : "Të dëbohet pas sa sekondash?",
+    "Save settings" : "Ruaji rregullimet",
+    "Password Policy" : "Rregulla Fjalëkalimesh",
+    "Determine minimum password length" : "Përcaktoni gjatësi minimum për fjalëkalimet",
+    "Save length" : "Ruaje gjatësinë",
+    "Enforce at least one upper and one lower case character on passwords" : "Zbato me detyrim e pakta një shenjë shkruar me të madhe dhe një shenjë shkruar me të vogël në fjalëkalime",
+    "Enforce at least one numerical characters on passwords" : "Zbato me detyrim e pakta një shenjë numerike në fjalëkalime",
+    "Enforce at least one special characters on passwords" : "Zbato me detyrim e pakta një shenjë speciale në fjalëkalime",
+    "Passwords must:" : "Fjalëkalimet duhen:",
+    "be at least %s characters long " : "të jenë e pakta %s shenja i gjatë",
+    "contain at least one uppercase letter and at least one lowercase letter " : "të përmbajë e pakta një shenjë shkruar me të madhe dhe e pakta një shenjë shkruar me të vogël",
+    "contain at least one numerical character" : "të përmbajnë e pakta një shenjë numerike",
+    "contain at least one special character" : "të përmbajnë e pakta një shenjë speciale"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
