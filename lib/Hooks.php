@@ -22,6 +22,7 @@
 
 namespace OCA\Security;
 
+use OC\User\LoginException;
 use OCP\IUserManager;
 use OCP\IRequest;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -65,15 +66,15 @@ class Hooks {
     }
 
     public function register() {
-        $this->userManager->listen('\OC\User', 'preLogin', function($user) {
-            $this->preLoginCallback();
+        $this->userManager->listen('\OC\User', 'preLogin', function($uid) {
+            $this->preLoginCallback($uid);
         });
 
         $this->userManager->listen('\OC\User', 'failedLogin', function($uid) {
             $this->failedLoginCallback($uid);
         });
 
-        $this->userManager->listen('\OC\User', 'postLogin', function($user) {
+        $this->userManager->listen('\OC\User', 'postLogin', function() {
             $this->postLoginCallback();
         });
 
@@ -94,7 +95,11 @@ class Hooks {
         $this->throttle->clearSuspiciousAttemptsForIp($this->request->getRemoteAddress());
     }
 
-    public function preLoginCallback() {
-        $this->throttle->applyBruteForcePolicy($this->request->getRemoteAddress());
+    /**
+     * @param string $uid
+     * @throws LoginException
+     */
+    public function preLoginCallback($uid) {
+        $this->throttle->applyBruteForcePolicy($uid, $this->request->getRemoteAddress());
     }
 }

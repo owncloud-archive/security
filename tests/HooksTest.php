@@ -72,7 +72,7 @@ class HooksTest extends TestCase {
         $this->passwordValidatorMock = $this->getMockBuilder('OCA\Security\PasswordValidator')
             ->disableOriginalConstructor()
             ->getMock();
-        $this->dispatcherMock = $this->getMockBuilder(EventDispatcher::class)
+        $this->dispatcherMock = $this->getMockBuilder('Symfony\Component\EventDispatcher\EventDispatcher')
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -112,7 +112,7 @@ class HooksTest extends TestCase {
         $this->throttleMock->expects($this->once())
             ->method('applyBruteForcePolicy');
 
-        $this->hooks->preLoginCallback();
+        $this->hooks->preLoginCallback('test');
         $this->assertTrue(true);
     }
 }

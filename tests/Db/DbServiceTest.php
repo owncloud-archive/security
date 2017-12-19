@@ -53,7 +53,7 @@ class DbServiceTest extends TestCase {
 
         $this->connection = \OC::$server->getDatabaseConnection();
         $this->factory = new TimeFactory();
-        $this->configMock = $this->getMockBuilder(SecurityConfig::class)
+        $this->configMock = $this->getMockBuilder('OCA\Security\SecurityConfig')
             ->disableOriginalConstructor()
             ->getMock();
         $this->dbService = new DbService($this->connection, $this->factory, $this->configMock);
@@ -97,6 +97,16 @@ class DbServiceTest extends TestCase {
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
         $this->assertEquals(2, $this->dbService->getSuspiciousActivityCountForIp('192.168.1.1'));
+    }
+
+    public function testGetSuspiciousActivityCountForUidIpCombination() {
+        $this->configMock->expects($this->once())
+            ->method('getBruteForceProtectionTimeThreshold')
+            ->willReturn('300');
+        $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
+        $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
+        $this->dbService->addFailedLoginAttempt("test2", "192.168.1.1");
+        $this->assertEquals(2, $this->dbService->getSuspiciousActivityCountForUidIpCombination('test1','192.168.1.1'));
     }
 
     public function testGetLastFailedLoginAttemptTimeForIp() {

@@ -87,8 +87,8 @@ class ThrottleTest extends TestCase {
             ->with('192.168.1.1')
             ->will($this->returnValue($lastAttempt));
         $this->dbServiceMock->expects($this->once())
-            ->method('getSuspiciousActivityCountForIp')
-            ->with('192.168.1.1')
+            ->method('getSuspiciousActivityCountForUidIpCombination')
+            ->with('test','192.168.1.1')
             ->will($this->returnValue($attemptCount));
         $this->configMock->expects($this->once())
             ->method('getBruteForceProtectionBanPeriod')
@@ -100,7 +100,7 @@ class ThrottleTest extends TestCase {
             ->method('getTime')
             ->will($this->returnValue($time));
         $this->expectException('OC\User\LoginException');
-        $this->throttle->applyBruteForcePolicy('192.168.1.1');
+        $this->throttle->applyBruteForcePolicy('test','192.168.1.1');
     }
     public function bruteForceTestData() {
         return [
