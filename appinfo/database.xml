@@ -41,7 +41,7 @@
             </index>
 
             <index>
-                <name>failed_login_attempts_attempted_at</name>
+                <name>failed_login_attempted_at</name>
                 <field>
                     <name>attempted_at</name>
                     <sorting>ascending</sorting>

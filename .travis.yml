@@ -1,5 +1,5 @@
-sudo: required
 language: php
+sudo: required
 php:
   - 5.6
   - 7.0
@@ -16,9 +16,9 @@ branches:
   only:
     - master
 
-install:
+before_install:
   - which php
-  - more `which pecl`
+  - more $(which pecl)
   - which phpize
   - bash tests/.travis/before_install.sh $APP_NAME $CORE_BRANCH $DB
   - make
