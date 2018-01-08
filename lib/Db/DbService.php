@@ -139,10 +139,25 @@ class DbService {
         return intval($lastAttempt['attempted_at']);
     }
 
+    /**
+     * @param string $ip
+     */
     public function deleteSuspiciousAttemptsForIp($ip) {
         $builder = $this->connection->getQueryBuilder();
         $builder->delete('failed_login_attempts')
             ->where($builder->expr()->eq('ip',$builder->createNamedParameter($ip)))
+            ->execute();
+    }
+
+    /**
+     * @param string $uid
+     * @param string $ip
+     */
+    public function deleteSuspiciousAttemptsForUidIpCombination($uid, $ip) {
+        $builder = $this->connection->getQueryBuilder();
+        $builder->delete('failed_login_attempts')
+            ->where($builder->expr()->eq('uid',$builder->createNamedParameter($uid)))
+            ->andWhere($builder->expr()->eq('ip', $builder->createNamedParameter($ip)))
             ->execute();
     }
 }

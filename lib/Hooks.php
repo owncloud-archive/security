@@ -73,9 +73,10 @@ class Hooks {
         $this->userManager->listen('\OC\User', 'failedLogin', function($uid) {
             $this->failedLoginCallback($uid);
         });
-
-        $this->userManager->listen('\OC\User', 'postLogin', function() {
-            $this->postLoginCallback();
+        
+        $this->userManager->listen('\OC\User', 'postLogin', function($user) {
+            /** @var $user \OC\User\User */
+            $this->postLoginCallback($user->getUID());
         });
 
         $this->dispatcher->addListener('OCP\User::validatePassword', function(GenericEvent $event) {
@@ -91,8 +92,11 @@ class Hooks {
         $this->throttle->addFailedLoginAttempt($uid, $this->request->getRemoteAddress());
     }
 
-    public function postLoginCallback() {
-        $this->throttle->clearSuspiciousAttemptsForIp($this->request->getRemoteAddress());
+    /**
+     * @param string $uid
+     */
+    public function postLoginCallback($uid) {
+        $this->throttle->clearSuspiciousAttemptsForUidIpCombination($uid, $this->request->getRemoteAddress());
     }
 
     /**

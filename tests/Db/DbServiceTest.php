@@ -139,4 +139,20 @@ class DbServiceTest extends TestCase {
         $this->assertSame('test2', $result[0]['uid']);
         $this->assertSame("192.168.1.2", $result[0]['ip']);
     }
+    public function testDeleteSuspiciousAttemptsForUidIpCombination() {
+        $this->dbService->addFailedLoginAttempt("test1", "192.168.1.1");
+        $this->dbService->addFailedLoginAttempt("test2", "192.168.1.1");
+
+        $builder = $this->connection->getQueryBuilder();
+        $query = $builder->select('*')->from($this->dbTable)
+            ->Where($builder->expr()->eq('ip', $builder->createNamedParameter("192.168.1.1")));
+        $result = $query->execute()->fetchAll();
+        $this->assertSame(2, count($result));
+
+        $this->dbService->deleteSuspiciousAttemptsForUidIpCombination('test1',"192.168.1.1");
+        $query = $builder->select('*')->from($this->dbTable)
+            ->Where($builder->expr()->eq('ip', $builder->createNamedParameter("192.168.1.1")));
+        $result = $query->execute()->fetchAll();
+        $this->assertSame(1, count($result));
+    }
 }

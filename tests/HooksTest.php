@@ -102,9 +102,9 @@ class HooksTest extends TestCase {
 
     public function testPostLoginCallback() {
         $this->throttleMock->expects($this->once())
-            ->method('clearSuspiciousAttemptsForIp');
+            ->method('clearSuspiciousAttemptsForUidIpCombination');
 
-        $this->hooks->postLoginCallback();
+        $this->hooks->postLoginCallback("test");
         $this->assertTrue(true);
     }
 
