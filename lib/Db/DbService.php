@@ -73,6 +73,24 @@ class DbService {
 
     /**
      * @param string $uid
+     * @param string $ip
+     * @return int
+     */
+    public function getSuspiciousActivityCountForUidIpCombination($uid, $ip) {
+        $builder = $this->connection->getQueryBuilder();
+        $thresholdTime = (new \DateTime())->modify("-". $this->config->getBruteForceProtectionTimeThreshold() . "second")->getTimestamp();
+        $attempts = $builder->selectAlias($builder->createFunction('COUNT(*)'), 'count')
+            ->from('failed_login_attempts')
+            ->where($builder->expr()->gt('attempted_at', $builder->createNamedParameter($thresholdTime)))
+            ->andWhere($builder->expr()->eq('uid', $builder->createNamedParameter($uid)))
+            ->andWhere($builder->expr()->eq('ip', $builder->createNamedParameter($ip)))
+            ->execute()
+            ->fetch();
+        return intval($attempts['count']);
+    }
+
+    /**
+     * @param string $uid
      * @return int
      */
     public function getSuspiciousActivityCountForUid($uid) {
@@ -121,10 +139,25 @@ class DbService {
         return intval($lastAttempt['attempted_at']);
     }
 
+    /**
+     * @param string $ip
+     */
     public function deleteSuspiciousAttemptsForIp($ip) {
         $builder = $this->connection->getQueryBuilder();
         $builder->delete('failed_login_attempts')
             ->where($builder->expr()->eq('ip',$builder->createNamedParameter($ip)))
+            ->execute();
+    }
+
+    /**
+     * @param string $uid
+     * @param string $ip
+     */
+    public function deleteSuspiciousAttemptsForUidIpCombination($uid, $ip) {
+        $builder = $this->connection->getQueryBuilder();
+        $builder->delete('failed_login_attempts')
+            ->where($builder->expr()->eq('uid',$builder->createNamedParameter($uid)))
+            ->andWhere($builder->expr()->eq('ip', $builder->createNamedParameter($ip)))
             ->execute();
     }
 }
