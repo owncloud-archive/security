@@ -1,0 +1,24 @@
+{ "translations": {
+    "Preferences are saved" : "Préférences sauvegardées",
+    "Length is saved" : "Longueur sauvegardée",
+    "Password needs to be at least %s characters long" : "Le mot de passe doit être de %s caractères minimum",
+    "Password should contain at least one upper and one lower case character." : "Le mot de passe doit contenir au moins une lettre majuscule et une lettre minuscule.",
+    "Password should contain at least one numerical character." : "Le mot de passe doit contenir au moins un caractère numérique.",
+    "Password should contain at least one special character." : "Le mot de passe doit contenir au moins un caractère spécial.",
+    "Too many failed login attempts. Try again in %s minutes." : "Trop de tentatives de connexions échouées. Réessayez dans %s minutes.",
+    "Brute Force Protection" : "Protection Brute Force",
+    "Ban after how many failed login attempts?" : "Bannir après combien de tentatives de connexions échoués?",
+    "Ban for how many seconds?" : "Bannir après combien de secondes?",
+    "Save settings" : "Sauvegarder les paramètres",
+    "Password Policy" : "Règles de mots de passe",
+    "Determine minimum password length" : "Déterminer la longueur minimum des mots de passe",
+    "Enforce at least one upper and one lower case character on passwords" : "Exiger au moins une majuscule et une minuscule aux mots de passe",
+    "Enforce at least one numerical characters on passwords" : "Exiger au moins un caractère numérique aux mots de passe",
+    "Enforce at least one special characters on passwords" : "Exiger au moins un caractère spécial aux mots de passe",
+    "Passwords must:" : "Les mots de passe doivent :",
+    "be at least %s characters long " : "contenir au moins %s caractères",
+    "contain at least one uppercase letter and at least one lowercase letter " : "contenir au moins une lettre majuscule et au moins une lettre minuscule",
+    "contain at least one numerical character" : "contenir au moins un caractère numérique",
+    "contain at least one special character" : "contenir au moins un caractère spécial"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}
