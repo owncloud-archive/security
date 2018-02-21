@@ -83,6 +83,10 @@ class Hooks {
             $this->passValidator->validate($event->getArgument('password'));
         });
 
+        $this->dispatcher->addListener('OCP\Share::validatePassword', function(GenericEvent $event) {
+            $this->passValidator->validate($event->getArgument('password'));
+        });
+
     }
 
     /**
