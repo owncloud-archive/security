@@ -1,0 +1,28 @@
+{ "translations": {
+    "Preferences are saved" : "Kjörstillingar vistaðar",
+    "Inputs must be positive integers" : "Inntak verður að vera jákvæð heiltala",
+    "Length is saved" : "Lengd er vistuð",
+    "Length must be positive integer" : "Lengd verður að vera jákvæð heiltala",
+    "Password needs to be at least %s characters long" : "Lykilorð verða að vera að minnsta kosti %s stafa löng",
+    "Password should contain at least one upper and one lower case character." : "Lykilorð verður að innihalda að minnsta kosti einn lágstaf og einn hástaf.",
+    "Password should contain at least one numerical character." : "Lykilorð verður að innihalda að minnsta kosti einn tölustaf.",
+    "Password should contain at least one special character." : "Lykilorð verður að innihalda að minnsta kosti eitt sértákn.",
+    "Too many failed login attempts. Try again in %s minutes." : "Of margar tilraunir til innskráningar. Prófaðu aftur eftir %s mínútur.",
+    "Brute Force Protection" : "Vörn gegn áhlaupi (brute force protection)",
+    "Count failed login attempts over how many seconds?" : "Fjöldi misheppnaðra innskráningartilrauna á hve mörgum sekúndum?",
+    "Ban after how many failed login attempts?" : "Banna eftir hve margar tilraunir til innskráningar?",
+    "Ban for how many seconds?" : "Banna í hve margar sekúndur?",
+    "Save settings" : "Vista stillingar",
+    "Password Policy" : "Stefna varðandi lykilorð",
+    "Determine minimum password length" : "Skilgreina lágmarkslengd lykilorðs",
+    "Save length" : "Vista lengd",
+    "Enforce at least one upper and one lower case character on passwords" : "Krefjast að lykilorð innihaldi að minnsta kosti einn lágstaf og einn hástaf",
+    "Enforce at least one numerical characters on passwords" : "Krefjast að lykilorð innihaldi að minnsta kosti einn tölustaf",
+    "Enforce at least one special characters on passwords" : "Krefjast að lykilorð innihaldi að minnsta kosti eitt sértákn",
+    "Passwords must:" : "Lykilorð verða:",
+    "be at least %s characters long " : "að innihalda að minnsta kosti %s stafi ",
+    "contain at least one uppercase letter and at least one lowercase letter " : "að innihalda að minnsta kosti einn lágstaf og einn hástaf",
+    "contain at least one numerical character" : "að innihalda að minnsta kosti einn tölustaf",
+    "contain at least one special character" : "að innihalda að minnsta kosti eitt sértákn"
+},"pluralForm" :"nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);"
+}
