@@ -24,5 +24,5 @@
     "contain at least one uppercase letter and at least one lowercase letter " : "לפחות אות קטנה אחת ואות גדולה אחת",
     "contain at least one numerical character" : "לפחות סיפרה אחת",
     "contain at least one special character" : "לפחות תו מיוחד אחד"
-},"pluralForm" :"nplurals=2; plural=(n != 1);"
+},"pluralForm" :"nplurals=4; plural=(n==1 ? 1: n == 2 ? 2 : (n % 10 == 0 and n > 10) ? 4);"
 }
