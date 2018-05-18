@@ -26,4 +26,4 @@ OC.L10N.register(
     "contain at least one numerical character" : "حداقل شامل یک کاراکتر عددی باشد",
     "contain at least one special character" : "حداقل شامل یک کاراکتر خاص باشد"
 },
-"nplurals=2; plural=((n<=1 && n>= 0) ? 1);");
+"nplurals=2; plural=(n > 1);");

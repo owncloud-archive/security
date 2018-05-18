@@ -23,5 +23,5 @@
     "contain at least one uppercase letter and at least one lowercase letter " : "حداقل شامل یک حرف بزرگ و یک حرف کوچک باشد",
     "contain at least one numerical character" : "حداقل شامل یک کاراکتر عددی باشد",
     "contain at least one special character" : "حداقل شامل یک کاراکتر خاص باشد"
-},"pluralForm" :"nplurals=2; plural=((n<=1 && n>= 0) ? 1);"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
