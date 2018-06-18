@@ -87,7 +87,7 @@ class HooksTest extends TestCase {
     public function testRegister() {
         $this->userManagerMock->expects($this->exactly(3))
             ->method('listen');
-        $this->dispatcherMock->expects($this->once())
+        $this->dispatcherMock->expects($this->exactly(2))
             ->method('addListener');
         $this->hooks->register();
     }
