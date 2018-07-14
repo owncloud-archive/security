@@ -2,14 +2,14 @@
 <info>
     <id>security</id>
     <name>Security</name>
-    <description>ownCloud Security app. It hardens ownCloud security with several new features including brute force protection, 404 detection and strong password enforcement.</description>
+    <description>ownCloud Security app. It hardens ownCloud security with several new features including brute force protection, 404 detection and strong password enforcement. This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality.</description>
     <summary>ownCloud security hardening app</summary>
     <licence>AGPL</licence>
     <author>Semih Serhat Karakaya</author>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <namespace>Security</namespace>
     <dependencies>
-        <owncloud min-version="10.0.3" max-version="10.0" />
+        <owncloud min-version="10.0.3" max-version="10.0.8" />
     </dependencies>
     <types>
         <prelogin/>

@@ -24,6 +24,7 @@ script('security', 'settings-admin');
 ?>
 <div id="security-brute-force-protection" class="section">
     <h2 class="inlineblock"><?php p($l->t('Brute Force Protection')); ?></h2>
+    <h3 class="warning"><?php p($l->t('This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality.')); ?></h3>
     <span id="security-save-bfp-settings-message" class="msg"></span>
     <div>
         <label for="security-bfp-threshold-time"><?php p($l->t('Count failed login attempts over how many seconds?')) ?></label><br>

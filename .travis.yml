@@ -8,7 +8,7 @@ php:
 
 env:
   global:
-    - CORE_BRANCH=master
+    - CORE_BRANCH=v10.0.8
     - APP_NAME=security
   matrix:
     - DB=sqlite
