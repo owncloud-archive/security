@@ -11,6 +11,7 @@ OC.L10N.register(
     "Password should contain at least one special character." : "A senha deve conter pelo menos um caractere especial.",
     "Too many failed login attempts. Try again in %s minutes." : "Muitas tentativas de login falharam. Tente novamente em %s minutos.",
     "Brute Force Protection" : "Proteção Força Bruta",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "Este aplicativo será suspenso e não haverá outra versão. Você pode usar o aplicativo Política de Senha e o aplicativo Brute Force Protection para obter a mesma funcionalidade.",
     "Count failed login attempts over how many seconds?" : "Contar tentativas de login com falhas em quantos segundos?",
     "Ban after how many failed login attempts?" : "Banir depois de quantas tentativas de login falhas?",
     "Ban for how many seconds?" : "Proibir por quantos segundos?",

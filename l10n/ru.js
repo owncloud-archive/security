@@ -11,6 +11,7 @@ OC.L10N.register(
     "Password should contain at least one special character." : "Пароль должен содержать как минимум один специальный символ.",
     "Too many failed login attempts. Try again in %s minutes." : "Слишком много неудачных попыток входа. Попробуйте ещё раз чере %s минут.",
     "Brute Force Protection" : "Защита от прямого перебора",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "Это приложение больше не рекомендуется эксплуатировать, дальнейших версий не будет. Те же самые возможности вы можете получить с помощью приложений Password Policy и Brute Force Protection.",
     "Count failed login attempts over how many seconds?" : "За сколько секунд считать неудачные попытки входа?",
     "Ban after how many failed login attempts?" : "Через сколько неудачных попыток входа банить?",
     "Ban for how many seconds?" : "На сколько секунд банить?",

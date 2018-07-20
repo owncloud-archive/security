@@ -11,6 +11,7 @@ OC.L10N.register(
     "Password should contain at least one special character." : "Passord må inneholde minst ett spesialtegn.",
     "Too many failed login attempts. Try again in %s minutes." : "For mange påloggingsforsøk, forsøk igjen om %sminutter.",
     "Brute Force Protection" : "Beskyttelse mot angrep med rå makt",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "Dette programet er foreldet og vedlikeholdes ikke lengre. Du kan benytte program for passord regler og for beskyttelse mot angrep (Brute force) for å oppnå samme funksjonalitet.",
     "Count failed login attempts over how many seconds?" : "I hvor mange sekunder skal telling av feilede pålogginger skje?",
     "Ban after how many failed login attempts?" : "Avvis etter hvor mange feilede påloggingsforsøk?",
     "Ban for how many seconds?" : "Avvis i hvor mange sekunder?",
