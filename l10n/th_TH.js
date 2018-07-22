@@ -11,6 +11,7 @@ OC.L10N.register(
     "Password should contain at least one special character." : "รหัสผ่านควรมีอักขระพิเศษอย่างน้อยหนึ่งตัว",
     "Too many failed login attempts. Try again in %s minutes." : "พยายามเข้าสู่ระบบไม่มากเกินไป ลองอีกครั้งในอีก %s นาที",
     "Brute Force Protection" : "ป้องกันการสุ่มเดารหัส",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "แอพพลิเคชันนี้ถูกเลิกใช้งานแล้วและจะไม่มีเวอร์ชันต่อไป คุณสามารถใช้แอพพลิเคชัน Password Policy และ Brute Force Protection เพื่อให้ได้ฟังก์ชันการทำงานเหมือนกัน",
     "Count failed login attempts over how many seconds?" : "นับจำนวนครั้งที่เข้าสู่ระบบล้มเหลวทุกๆกี่วินาที?",
     "Ban after how many failed login attempts?" : "แบนหลังจากเข้าสู่ระบบล้มเหลวกี่ครั้ง?",
     "Ban for how many seconds?" : "ห้ามใช้กี่วินาที?",
