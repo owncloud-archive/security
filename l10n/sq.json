@@ -9,6 +9,7 @@
     "Password should contain at least one special character." : "Fjalëkalimi do të duhej të përmbante e pakta një shenjë speciale.",
     "Too many failed login attempts. Try again in %s minutes." : "Shumë përpjekje të dështuara për hyrje. Riprovoni pas %s minutash?",
     "Brute Force Protection" : "Mbrojtje Nga Hyrjet Me Zor",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "Ky aplikacion do të nxirret nga qarkullimi dhe s’do të ketë më version të mëtejshëm. Për të pasur të njëjtat aftësi, mund të përdorni aplikacionin Rregulla Fjalëkalimesh dhe aplikacionin Mbrojtje nga Sulme Brute Force.",
     "Count failed login attempts over how many seconds?" : "Të numërojë përpjekje të dështuara për hyrje tej sa sekondash? ",
     "Ban after how many failed login attempts?" : "Të dëbohet pas sa përpjekjesh të dështuara për hyrje?",
     "Ban for how many seconds?" : "Të dëbohet pas sa sekondash?",
