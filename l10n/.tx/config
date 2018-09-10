@@ -7,3 +7,4 @@ file_filter = <lang>/security.po
 source_file = templates/security.pot
 source_lang = en
 type = PO
+
