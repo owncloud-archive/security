@@ -9,6 +9,7 @@
     "Password should contain at least one special character." : "La Password deve contenere almeno un carattere speciale.",
     "Too many failed login attempts. Try again in %s minutes." : "Troppi tentativi di login falliti. Riprova tra %s minuti.",
     "Brute Force Protection" : "Protezione da attacchi Brute Force",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "Questa applicazione sarà deprecata e non ci saranno ulteriori versioni. Puoi utilizzare l'applicazione Password Policy e l'applicazione Protezione Brute Force per ottenere le stesse funzionalità.",
     "Count failed login attempts over how many seconds?" : "Contare i tentativi falliti di login ogni quanti secondi?",
     "Ban after how many failed login attempts?" : "Dopo quanti tentativi di login falliti bisogna bannare l'utente?",
     "Ban for how many seconds?" : "Per quanto tempo in secondi va bannato l'utente?",
