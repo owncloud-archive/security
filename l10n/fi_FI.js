@@ -2,6 +2,7 @@ OC.L10N.register(
     "security",
     {
     "Preferences are saved" : "Asetukset on tallennettu",
+    "Inputs must be positive integers" : "Syötteen tulee olla positiivisia kokonaislukuja",
     "Length is saved" : "Pituus on tallennettu",
     "Password needs to be at least %s characters long" : "Salasanan tulee olla vähintään %s merkkiä pitkä",
     "Password should contain at least one upper and one lower case character." : "Salasanan tukee sisältää vähintään yksi iso kirjain ja yksi pieni kirjain.",
