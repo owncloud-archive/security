@@ -11,6 +11,7 @@ OC.L10N.register(
     "Password should contain at least one special character." : "密码应至少包含一个特殊字符",
     "Too many failed login attempts. Try again in %s minutes." : "太多错误了，请在%s分钟之后重试",
     "Brute Force Protection" : "暴力破解保护",
+    "This app will be deprecated and there will not be further version. You can use the Password Policy app and the Brute Force Protection app to achieve the same functionality." : "本应用即将废弃，不再更新版本。为获得同样的功能，请使用 Password Policy 和 Brute Force Protection。",
     "Count failed login attempts over how many seconds?" : "计算多少秒内的失败次数？",
     "Ban after how many failed login attempts?" : "多少次登录失败后进行封禁？",
     "Ban for how many seconds?" : "封禁多少秒？",
